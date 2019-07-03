@@ -8,11 +8,13 @@ public class Bullet : MonoBehaviour
     public Transform BulletTransform;
     public Rigidbody BulletRigidBody;
     public float TravelSpeed = 50f;
+    public int Damage = 0;
 
     [SerializeField]
-    private GameObject bulletHole = null;
-    [SerializeField]
     private TrailRenderer bulletTrail = null;
+    [SerializeField]
+    private GameObject bulletHole = null;
+
     private int bulletLifeTime = 3;
 
     public void FireBullet(Transform gunTransform)
@@ -27,7 +29,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            other.gameObject.SetActive(false);
+            other.GetComponent<Enemy>().GetHit(Damage);
         }
         StopAllCoroutines();
         BulletRigidBody.velocity = Vector3.zero;

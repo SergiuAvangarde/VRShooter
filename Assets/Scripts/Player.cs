@@ -1,16 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     public static Player Instance = null;
+    public GameManager ManagerComponent;
     public Transform PlayerTransform;
     public int MaxHealth;
     public int CurrentHealth;
     public int Damage;
     public int Bullets;
     public int Score;
+
+    [SerializeField]
+    private GameObject pistolGun = null;
+    [SerializeField]
+    private GameObject assaultRiffleGun = null;
+
 
     private void Awake()
     {
@@ -23,6 +31,13 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+        CurrentHealth = MaxHealth;
+    }
+
+    public void SetAssaultRiffle()
+    {
+        pistolGun.SetActive(false);
+        assaultRiffleGun.SetActive(true);
     }
 
     public void IncreaseMaxHealth(int amount)
@@ -57,10 +72,11 @@ public class Player : MonoBehaviour
     public void IncreaseScore(int amount)
     {
         Score += amount;
+        ManagerComponent.SetScore(Score);
     }
 
     private void GameOver()
     {
-        Debug.Log("You died");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
