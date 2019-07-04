@@ -5,20 +5,12 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Player PlayerInformation;
+    public Player PlayerComponent;
     public SpawnEnemies EnemySpawner;
-    public Text ScoreText;
-    public Text PlayerHealth;
     public int Score = 0;
-
-    private void Awake()
-    {
-        ScoreText.text = $"Score: 0";
-    }
 
     private void Update()
     {
-        PlayerHealth.text = $"HP: {PlayerInformation.CurrentHealth}/{PlayerInformation.MaxHealth}";
         if (Score > 100 && Score < 500)
         {
             EnemySpawner.spawnTimer = 8;
@@ -30,7 +22,7 @@ public class GameManager : MonoBehaviour
         else if (Score > 1000 && Score < 2000)
         {
             EnemySpawner.spawnTimer = 4;
-            PlayerInformation.SetAssaultRiffle();
+            PlayerComponent.SetAssaultRiffle();
         }
         else if (Score > 2000 && Score < 5000)
         {
@@ -49,6 +41,5 @@ public class GameManager : MonoBehaviour
     public void SetScore(int totalScore)
     {
         Score = totalScore;
-        ScoreText.text = $"Score: {totalScore}";
     }
 }

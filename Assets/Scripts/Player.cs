@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public static Player Instance = null;
     public GameManager ManagerComponent;
     public Transform PlayerTransform;
+    public Text ScoreText;
+    public Text PlayerHealth;
     public int MaxHealth;
     public int CurrentHealth;
     public int Damage;
@@ -19,19 +21,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject assaultRiffleGun = null;
 
-
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else if (Instance != this)
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
         CurrentHealth = MaxHealth;
+        PlayerHealth.text = $"HP: {CurrentHealth}/{MaxHealth}";
+        ScoreText.text = $"Score: {Score}";
     }
 
     public void SetAssaultRiffle()
@@ -43,10 +37,13 @@ public class Player : MonoBehaviour
     public void IncreaseMaxHealth(int amount)
     {
         MaxHealth += amount;
+        CurrentHealth = MaxHealth;
+        PlayerHealth.text = $"HP: {CurrentHealth}/{MaxHealth}";
     }
 
     public void TakeDamage(int amount)
     {
+        PlayerHealth.text = $"HP: {CurrentHealth}/{MaxHealth}";
         CurrentHealth -= amount;
         if(CurrentHealth <= 0)
         {
@@ -72,11 +69,15 @@ public class Player : MonoBehaviour
     public void IncreaseScore(int amount)
     {
         Score += amount;
+        ScoreText.text = $"Score: {Score}";
         ManagerComponent.SetScore(Score);
     }
 
     private void GameOver()
     {
+        Score = 0;
+        ManagerComponent.SetScore(Score);
+        CurrentHealth = MaxHealth;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

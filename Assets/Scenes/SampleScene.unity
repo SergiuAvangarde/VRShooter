@@ -720,7 +720,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 171526, guid: 60270cf52a5e94998a5a335989159738, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 482300, guid: 60270cf52a5e94998a5a335989159738, type: 3}
       propertyPath: m_LocalPosition.x
@@ -769,10 +769,18 @@ PrefabInstance:
     - target: {fileID: 723926960, guid: 60270cf52a5e94998a5a335989159738, type: 3}
       propertyPath: overridePointerCamera
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 534669904}
     - target: {fileID: 723926960, guid: 60270cf52a5e94998a5a335989159738, type: 3}
       propertyPath: maxReticleDistance
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 723926960, guid: 60270cf52a5e94998a5a335989159738, type: 3}
+      propertyPath: raycastMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 723926960, guid: 60270cf52a5e94998a5a335989159738, type: 3}
+      propertyPath: drawDebugRays
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60270cf52a5e94998a5a335989159738, type: 3}
@@ -6350,7 +6358,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb5dd43baba2d4dc1bab789615567e3d, type: 3}
   m_Name: 
@@ -11625,7 +11633,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &716803382
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11945,10 +11953,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3585ce66e663d2f48991bd49944dc53d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerInformation: {fileID: 1238662268}
+  PlayerComponent: {fileID: 1238662268}
   EnemySpawner: {fileID: 769893536}
-  ScoreText: {fileID: 1130236320}
-  PlayerHealth: {fileID: 2120579984}
   Score: 0
 --- !u!4 &769893535
 Transform:
@@ -17786,7 +17792,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036320623}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.56}
   m_LocalScale: {x: 0.0009999999, y: 0.0009999999, z: 0.0009999999}
   m_Children:
@@ -17798,7 +17804,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.0009999871, y: 0}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1036320625
@@ -17850,7 +17856,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 534669904}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -18532,7 +18538,7 @@ GameObject:
   - component: {fileID: 1238662268}
   m_Layer: 10
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18581,6 +18587,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ManagerComponent: {fileID: 769893534}
   PlayerTransform: {fileID: 1238662266}
+  ScoreText: {fileID: 1130236320}
+  PlayerHealth: {fileID: 2120579984}
   MaxHealth: 100
   CurrentHealth: 0
   Damage: 10
@@ -25021,6 +25029,7 @@ MonoBehaviour:
   minSparkEmission: 4
   maxSparkEmission: 10
   pointerPos: {fileID: 1730922621}
+  PlayerComponent: {fileID: 1238662268}
   weaponAnimator: {fileID: 1390907731}
   bulletPrefab: {fileID: 7501131036890579038, guid: fa1c6c3e17ff7cc49b7c67906d439d7d,
     type: 3}
@@ -27967,6 +27976,7 @@ MonoBehaviour:
   minSparkEmission: 1
   maxSparkEmission: 7
   pointerPos: {fileID: 1730922621}
+  PlayerComponent: {fileID: 1238662268}
   weaponAnimator: {fileID: 2057041891}
   bulletPrefab: {fileID: 7501131036890579038, guid: fa1c6c3e17ff7cc49b7c67906d439d7d,
     type: 3}

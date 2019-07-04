@@ -15,12 +15,16 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private Animator animatorComponent;
     [SerializeField]
+    private AnimationClip attackAnimation;
+    [SerializeField]
     private NavMeshAgent navAgent;
 
+    private Player playerComponent;
     private Transform playerTransform;
     private float distance = 0;
-    private float attackDelay;
     private int currentHealth;
+    private float attackDuration;
+    private float attackTimer;
 
     private bool dying = false;
 
@@ -28,7 +32,10 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = MaxHealth;
         animatorComponent.SetBool("Attack", false);
-        StartCoroutine(MoveTowardsPlayer(Player.Instance.PlayerTransform));
+        attackDuration = attackAnimation.length;
+        attackTimer = attackDuration;
+        playerComponent = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        StartCoroutine(MoveTowardsPlayer(playerComponent.PlayerTransform));
     }
     private void OnDisable()
     {
@@ -43,13 +50,14 @@ public class Enemy : MonoBehaviour
             distance = Vector3.Distance(playerTransform.position, enemyTransform.position);
         }
 
-        if (distance < navAgent.stoppingDistance + 0.5f)
+        if (distance < navAgent.stoppingDistance + 1f)
         {
             animatorComponent.SetBool("Attack", true);
-            if (Time.time >= attackDelay)
+            attackTimer += Time.deltaTime;
+            if (attackTimer >= attackDuration)
             {
-                attackDelay = Time.time + 1 / 1;
-                Player.Instance.TakeDamage(Damage);
+                attackTimer = 0;
+                playerComponent.TakeDamage(Damage);
             }
         }
         else
@@ -68,7 +76,7 @@ public class Enemy : MonoBehaviour
             if (currentHealth < 0)
             {
                 dying = true;
-                Player.Instance.IncreaseScore(KillScore);
+                playerComponent.IncreaseScore(KillScore);
                 StopAllCoroutines();
                 StartCoroutine(DieAnimation());
             }

@@ -35,6 +35,8 @@ public class GunScript : MonoBehaviour
     [SerializeField]
     private GvrReticlePointer pointerPos = null;
     [SerializeField]
+    private Player PlayerComponent;
+    [SerializeField]
     private Animator weaponAnimator = null;
     [SerializeField]
     private GameObject bulletPrefab = null;
@@ -107,7 +109,7 @@ public class GunScript : MonoBehaviour
             Bullet bullet = (Bullet)BulletPool.Dequeue();
             GameObject bulletCasing = (GameObject)BulletCasingPool.Dequeue();
             bullet.GunScriptComponent = this;
-            bullet.Damage = Player.Instance.Damage;
+            bullet.Damage = PlayerComponent.Damage;
             bullet.FireBullet(bulletSpawnPoint);
             bulletCasing.SetActive(true);
             Transform casingTransform = bulletCasing.GetComponent<Transform>();
@@ -121,7 +123,7 @@ public class GunScript : MonoBehaviour
             GameObject bulletCasingObject = Instantiate(bulletCasingPrefab, bulletPoolContainer);
             Bullet bullet = bulletObject.GetComponent<Bullet>();
             bullet.GunScriptComponent = this;
-            bullet.Damage = Player.Instance.Damage;
+            bullet.Damage = PlayerComponent.Damage;
             bullet.FireBullet(bulletSpawnPoint);
             bulletCasingObject.SetActive(true);
             Transform casingTransform = bulletCasingObject.GetComponent<Transform>();

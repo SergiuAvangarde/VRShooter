@@ -843,6 +843,7 @@ MonoBehaviour:
   KillScore: 100
   enemyTransform: {fileID: 7786585108080747661}
   animatorComponent: {fileID: 7786585108087638819}
+  attackAnimation: {fileID: 7400000, guid: dfc15c633f0d98141920018f79a042a6, type: 3}
   navAgent: {fileID: 1196897540}
 --- !u!1 &7786585108080261295
 GameObject:
